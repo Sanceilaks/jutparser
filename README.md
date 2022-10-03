@@ -1,5 +1,3 @@
-Набор функций для парсинга аниме с [jut.su](https://jut.su) <br>
-
 ### Пример
 ```python
 async def main():
