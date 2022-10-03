@@ -1,4 +1,4 @@
-### Пример
+### Example
 ```python
 async def main():
     for i in await get_animes('Две звезды'):
