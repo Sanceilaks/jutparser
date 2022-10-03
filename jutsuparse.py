@@ -1,3 +1,4 @@
+from typing import AsyncGenerator
 import aiohttp
 import bs4
 import re
@@ -16,7 +17,7 @@ class JutAnime():
     url: str
     img: str
 
-    async def get_episodes(self):
+    async def get_episodes(self) -> AsyncGenerator[JutEpisode]:
         async with await create_session() as session:
             async with session.get(self.url) as resp:
                 bs = bs4.BeautifulSoup(await resp.text(), 'html.parser')
@@ -37,7 +38,7 @@ async def create_session() -> aiohttp.ClientSession:
     return s
 
 
-async def get_animes(name: str):
+async def get_animes(name: str) -> list[JutAnime]:
     async def parse(raw: str) -> list[JutAnime]:
         parse_results: list[JutAnime] = []
 
