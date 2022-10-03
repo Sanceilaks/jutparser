@@ -17,7 +17,7 @@ class JutAnime():
     url: str
     img: str
 
-    async def get_episodes(self) -> AsyncGenerator[JutEpisode]:
+    async def get_episodes(self) -> AsyncGenerator[JutEpisode, None]:
         async with await create_session() as session:
             async with session.get(self.url) as resp:
                 bs = bs4.BeautifulSoup(await resp.text(), 'html.parser')
