@@ -66,13 +66,3 @@ async def get_animes(name: str):
                    'show_search': name, 'anime_of_user': ''}
         async with session.post('https://jut.su/anime/', data=payload) as resp:
             return await parse(await resp.text())
-
-
-async def main():
-    for i in await get_animes('Две звезды'):
-        async for j in i.get_episodes():
-            print(j.name)
-
-
-if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(main())
