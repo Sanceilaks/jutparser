@@ -1,16 +1,7 @@
 import aiohttp
-import asyncio
 import bs4
 import re
 from dataclasses import dataclass
-
-
-async def create_session() -> aiohttp.ClientSession:
-    s = aiohttp.ClientSession()
-    s.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0'
-    await s.head('http://jut.su/anime/')
-
-    return s
 
 
 @dataclass
@@ -37,6 +28,13 @@ class JutAnime():
                         name = ''.join(vbs.select_one(
                             '.video_plate_title').select_one('h2').contents)
                     yield JutEpisode(url, name)
+
+
+async def create_session() -> aiohttp.ClientSession:
+    s = aiohttp.ClientSession()
+    s.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0'
+    await s.head('http://jut.su/anime/')
+    return s
 
 
 async def get_animes(name: str):
